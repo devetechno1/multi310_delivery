@@ -29,6 +29,9 @@ class ApiClient extends GetxService {
     updateHeader(token, sharedPreferences.getString(AppConstants.languageCode));
   }
 
+  void updateHeaderLang(String languageCode) {
+    _mainHeaders[AppConstants.localizationKey] = languageCode;
+  }
   void updateHeader(String? token, String? languageCode) {
     _mainHeaders = {
       'Content-Type': 'application/json; charset=UTF-8',

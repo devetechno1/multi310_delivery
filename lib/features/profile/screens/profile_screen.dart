@@ -105,7 +105,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Row(children: [
                 ProfileCardWidget(title: 'since_joining'.tr, data: '${profileController.profileModel!.memberSinceDays} ${'days'.tr}'),
                 const SizedBox(width: Dimensions.paddingSizeSmall),
-                ProfileCardWidget(title: 'total_order'.tr, data: profileController.profileModel!.orderCount.toString()),
+                ProfileCardWidget(title: 'total_orders'.tr, data: profileController.profileModel!.orderCount.toString()),
               ]),
               const SizedBox(height: 30),
 
@@ -143,7 +143,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     const Icon(Icons.notifications_active_rounded, size: 25),
                     const SizedBox(width: Dimensions.paddingSizeSmall),
 
-                    Expanded(child: Text('background_notification'.tr, style: robotoRegular)),
+                    Expanded(child: Text('background_notifications'.tr, style: robotoRegular)),
 
                     Transform.scale(
                       scale: 0.7,
@@ -188,10 +188,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const SizedBox(height: Dimensions.paddingSizeSmall),
                 ]),
 
-              ProfileButtonWidget(icon: Icons.language, title: 'language'.tr, onTap: () {
-                _manageLanguageFunctionality();
-              }),
-              const SizedBox(height: Dimensions.paddingSizeSmall),
+              if(AppConstants.languages.length > 1)...[
+                ProfileButtonWidget(icon: Icons.language, title: 'language'.tr, onTap: () {
+                  _manageLanguageFunctionality();
+                }),
+                const SizedBox(height: Dimensions.paddingSizeSmall),
+              ],
 
               ProfileButtonWidget(icon: Icons.lock, title: 'change_password'.tr, onTap: () {
                 Get.toNamed(RouteHelper.getResetPasswordRoute('', '', 'password-change'));

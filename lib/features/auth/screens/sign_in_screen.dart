@@ -120,7 +120,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                     TextButton(
                       onPressed: () => Get.toNamed(RouteHelper.getForgotPassRoute()),
-                      child: Text('${'forgot_password'.tr}?'),
+                      child: Text('did_u_forgot_password'.tr),
                     ),
                   ]),
                   const SizedBox(height: 50),
@@ -140,7 +140,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       Get.toNamed(RouteHelper.getDeliverymanRegistrationRoute());
                     },
                     child: RichText(text: TextSpan(children: [
-                      TextSpan(text: '${'join_as_a'.tr} ', style: robotoRegular.copyWith(color: Theme.of(context).disabledColor)),
+                      TextSpan(text: 'join_as_a'.tr, style: robotoRegular.copyWith(color: Theme.of(context).disabledColor)),
                       TextSpan(text: 'delivery_man'.tr, style: robotoMedium.copyWith(color: Theme.of(context).textTheme.bodyLarge!.color)),
                     ])),
                   ) : const SizedBox(),

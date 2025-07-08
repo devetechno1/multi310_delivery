@@ -174,9 +174,12 @@ class _DeliveryManRegistrationScreenState extends State<DeliveryManRegistrationS
                                 Icon(Icons.photo_camera, size: 26, color: Theme.of(context).disabledColor),
                                 const SizedBox(height: Dimensions.paddingSizeSmall),
 
-                                Text(
-                                  'upload_profile_picture'.tr,
-                                  style: robotoMedium.copyWith(color: Theme.of(context).disabledColor, fontSize: Dimensions.fontSizeSmall), textAlign: TextAlign.center,
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeLarge),
+                                  child: Text(
+                                    'upload_profile_picture'.tr,
+                                    style: robotoMedium.copyWith(color: Theme.of(context).disabledColor, fontSize: Dimensions.fontSizeSmall), textAlign: TextAlign.center,
+                                  ),
                                 ),
                               ]),
                             ),

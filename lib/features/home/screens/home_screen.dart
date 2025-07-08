@@ -25,6 +25,8 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
+import '../../language/controllers/language_controller.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -180,31 +182,34 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           GetBuilder<ProfileController>(builder: (profileController) {
             return GetBuilder<OrderController>(builder: (orderController) {
-              return (profileController.profileModel != null && orderController.currentOrderList != null) ? FlutterSwitch(
-                width: 75, height: 30, valueFontSize: Dimensions.fontSizeExtraSmall, showOnOff: true,
-                activeText: 'online'.tr, inactiveText: 'offline'.tr, activeColor: Theme.of(context).primaryColor,
-                value: profileController.profileModel!.active == 1, onToggle: (bool isActive) async {
-                  if(!isActive && orderController.currentOrderList!.isNotEmpty) {
-                    showCustomSnackBar('you_can_not_go_offline_now'.tr);
-                  }else {
-                    if(!isActive) {
-                      Get.dialog(ConfirmationDialogWidget(
-                        icon: Images.warning, description: 'are_you_sure_to_offline'.tr,
-                        onYesPressed: () {
-                          Get.back();
-                          profileController.updateActiveStatus();
-                        },
-                      ));
+              return (profileController.profileModel != null && orderController.currentOrderList != null) ? Directionality(
+                textDirection: TextDirection.ltr,
+                child: FlutterSwitch(
+                  width: 75, height: 30, valueFontSize: Dimensions.fontSizeExtraSmall, showOnOff: true,
+                  activeText: 'online'.tr, inactiveText: 'offline'.tr, activeColor: Theme.of(context).primaryColor,
+                  value: profileController.profileModel!.active == 1, onToggle: (bool isActive) async {
+                    if(!isActive && orderController.currentOrderList!.isNotEmpty) {
+                      showCustomSnackBar('you_can_not_go_offline_now'.tr);
                     }else {
-                      LocationPermission permission = await Geolocator.checkPermission();
-                      if(permission == LocationPermission.denied || permission == LocationPermission.deniedForever || (GetPlatform.isIOS ? false : permission == LocationPermission.whileInUse)) {
-                        _checkPermission(() => profileController.updateActiveStatus());
+                      if(!isActive) {
+                        Get.dialog(ConfirmationDialogWidget(
+                          icon: Images.warning, description: 'are_you_sure_to_offline'.tr,
+                          onYesPressed: () {
+                            Get.back();
+                            profileController.updateActiveStatus();
+                          },
+                        ));
                       }else {
-                        profileController.updateActiveStatus();
+                        LocationPermission permission = await Geolocator.checkPermission();
+                        if(permission == LocationPermission.denied || permission == LocationPermission.deniedForever || (GetPlatform.isIOS ? false : permission == LocationPermission.whileInUse)) {
+                          _checkPermission(() => profileController.updateActiveStatus());
+                        }else {
+                          profileController.updateActiveStatus();
+                        }
                       }
                     }
-                  }
-                },
+                  },
+                ),
               ) : const SizedBox();
             });
           }),
@@ -417,7 +422,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     const SizedBox(width: Dimensions.paddingSizeSmall),
-                    const Icon(Icons.arrow_circle_right_rounded, color: Colors.white, size: 24,),
+                    Icon( 
+                      Get.find<LocalizationController>().isLtr 
+                        ? Icons.arrow_circle_right_rounded 
+                        : Icons.arrow_circle_left_rounded , 
+                      color: Colors.white, 
+                      size: 24,
+                    ),
                   ]),
                 ),
 
@@ -425,8 +436,8 @@ class _HomeScreenState extends State<HomeScreen> {
               ]),
             ),
 
-            Positioned(
-              top: 5, right: 5,
+            PositionedDirectional(
+              top: 5, end: 5,
               child: InkWell(
                 onTap: closeOnTap,
                 child: const Icon(Icons.clear, color: Colors.white, size: 18),
