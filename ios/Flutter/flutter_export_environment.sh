@@ -1,7 +1,7 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=/Users/devetechno/flutter"
-export "FLUTTER_APPLICATION_PATH=/Users/devetechno/Desktop/projects/multi310/master/master_delivery"
+export "FLUTTER_ROOT=/Users/devetechno/development/flutter"
+export "FLUTTER_APPLICATION_PATH=/Users/devetechno/Desktop/projects/multicms_v3.10/master/master_delivery"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_TARGET=lib/main.dart"
 export "FLUTTER_BUILD_DIR=build"

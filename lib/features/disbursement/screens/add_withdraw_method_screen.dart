@@ -10,6 +10,8 @@ import 'package:sixam_mart_delivery/common/widgets/custom_dropdown_widget.dart';
 import 'package:sixam_mart_delivery/common/widgets/custom_snackbar_widget.dart';
 import 'package:sixam_mart_delivery/common/widgets/text_field_widget.dart';
 
+import '../../language/controllers/language_controller.dart';
+
 class AddWithDrawMethodScreen extends StatefulWidget {
   const AddWithDrawMethodScreen({super.key});
 
@@ -109,6 +111,7 @@ class _AddWithDrawMethodScreenState extends State<AddWithDrawMethodScreen> {
                           IconButton(
                             onPressed: () async {
                               DateTime? pickedDate = await showDatePicker(
+                                locale: Get.find<LocalizationController>().locale,
                                 context: context,
                                 initialDate: DateTime.now(),
                                 firstDate: DateTime.now(),
